@@ -1,4 +1,3 @@
-// tek naknadna implementacija u daljnjem razvoju aplikacije 
 'use client'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
