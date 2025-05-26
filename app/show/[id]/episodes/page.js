@@ -15,27 +15,29 @@ export default function EpisodesPage() {
   }, [id])
 
   return (
-    <div style={{ padding: '20px' }}>
-      <div style={{ marginBottom: '20px' }}>
-        <Link href={`/show/${id}`}>&larr; Povratak na detalje serije</Link>
+    <div className="p-6">
+      <div className="mb-4">
+        <Link href={`/show/${id}`} className="text-blue-200 hover:underline">
+          ← Povratak na detalje serije
+        </Link>
       </div>
 
-      <h1>Epizode</h1>
+      <h1 className="text-2xl font-bold mb-6">Epizode</h1>
+
       {episodes.length === 0 ? (
         <p>Učitavanje epizoda...</p>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {episodes.map(ep => (
-            <div key={ep.id} style={{ border: '1px solid #ccc', borderRadius: '8px', padding: '12px', background: '#f9f9f9' }}>
-              <h3>{ep.name}</h3>
+            <div key={ep.id} className="bg-[#593939] p-4 rounded-lg shadow hover:scale-105 transition-transform">
+              <h3 className="text-lg font-semibold mb-1">{ep.name}</h3>
               <p><strong>Sezona:</strong> {ep.season} | <strong>Ep:</strong> {ep.number}</p>
               <p><strong>Datum prikazivanja:</strong> {ep.airdate}</p>
-              {ep.image?.medium && <img src={ep.image.medium} alt={ep.name} style={{ width: '100%', borderRadius: '6px' }} />}
+              {ep.image?.medium && (
+                <img src={ep.image.medium} alt={ep.name} className="w-full mt-3 rounded-md" />
+              )}
               {ep.summary && (
-                <p style={{ marginTop: '10px' }}>
-                  <strong>Opis:</strong><br />
-                  <span dangerouslySetInnerHTML={{ __html: ep.summary }} />
-                </p>
+                <p className="text-sm mt-2 text-[#e2dcdc]" dangerouslySetInnerHTML={{ __html: ep.summary }} />
               )}
             </div>
           ))}
@@ -44,8 +46,3 @@ export default function EpisodesPage() {
     </div>
   )
 }
-<Link href={`/show/${id}/episodes`}>
-  <button style={{ padding: '8px 16px', backgroundColor: '#0070f3', color: 'white', border: 'none', borderRadius: '6px' }}>
-    Pogledaj sve epizode
-  </button>
-</Link> 

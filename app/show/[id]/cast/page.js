@@ -1,12 +1,19 @@
+// tek naknadna implementacija u daljnjem razvoju aplikacije
 'use client'
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
+// useParams je potreban radi dinamickog id-a
 
 export default function CastPage() {
   const { id } = useParams()
   const [cast, setCast] = useState([])
 
+  /*
+  provjerom se osiguravamo da id postoji, 
+  te za zeljeni id serije dobivamo popis glumaca 
+  kojeg spremamo u cast varijabu stanja
+  */
   useEffect(() => {
     if (!id) return
     fetch(`https://api.tvmaze.com/shows/${id}/cast`)
@@ -14,6 +21,11 @@ export default function CastPage() {
       .then(data => setCast(data))
   }, [id])
 
+  /*
+  - korištenje ternarnog operatora (if logika ), 
+  ako podatci jos nisu dohvaceni prikazuje se odgovarajuce poruka,
+  ako su podatci dohvaceni prikazuje se popis glumaca
+  */ 
   return (
     <div style={{ padding: '20px' }}>
       <div style={{ marginBottom: '20px' }}>
